@@ -39,30 +39,6 @@ The system provides detailed reuse guides for:
    pip install -r requirements.txt
    ```
 
-3. **Setup YouTube API (Optional but Recommended)**:
-   
-   YouTube tutorials के लिए Google's YouTube Data API v3 use होता है (free tier available - 10,000 units/day).
-   
-   **Quick Setup:**
-   - Google Cloud Console में जाएं: https://console.cloud.google.com/
-   - नया project बनाएं
-   - YouTube Data API v3 enable करें
-   - API key बनाएं
-   - Environment variable set करें:
-   
-   **Windows (PowerShell):**
-   ```powershell
-   $env:YOUTUBE_API_KEY="your_api_key_here"
-   ```
-   
-   **Linux/Mac:**
-   ```bash
-   export YOUTUBE_API_KEY="your_api_key_here"
-   ```
-   
-   **Detailed Hindi Guide:** `YOUTUBE_API_SETUP.md` file देखें (step-by-step instructions)
-   
-   ⚠️ **Note**: बिना API key के भी system काम करेगा, लेकिन YouTube tutorials नहीं दिखेंगे।
 
 ## Running the Application
 
