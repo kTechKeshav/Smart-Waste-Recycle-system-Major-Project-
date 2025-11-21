@@ -1,0 +1,63 @@
+# ----------------------------
+# Python
+# ----------------------------
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pkl
+
+# Virtual environment
+venv/
+env/
+.venv/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# ----------------------------
+# TensorFlow / ML Artifacts
+# ----------------------------
+# TF model temporary files
+*.h5
+*.keras
+*.pb
+*.tflite
+*.onnx
+*.ckpt*
+**/assets/
+**/variables/
+
+# Skip huge trained models (optional)
+backend/models/*.keras
+backend/models/*.h5
+
+# ----------------------------
+# Project Specific
+# ----------------------------
+# Raw dataset (too large)
+data_raw/
+
+# Split dataset folders (regenerated)
+backend/data/train/
+backend/data/val/
+backend/data/test/
+
+# Temporary logs
+*.log
+
+# Local environment variables
+.env
+.DS_Store
+
+# IDE settings
+.vscode/
+.idea/
+
+# OS files
+Thumbs.db
+
+# ----------------------------
+# NodeJS (if frontend ever uses build tools)
+# ----------------------------
+node_modules/
