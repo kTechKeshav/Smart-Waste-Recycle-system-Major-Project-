@@ -77,13 +77,13 @@ const RecycleAssessment = () => {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 px-4 overflow-hidden">
+      <section className="relative pt-24 pb-12 md:pt-32 md:pb-20 px-4 overflow-hidden">
         {/* Background Elements */}
         <div className="absolute top-0 inset-x-0 h-[500px] bg-gradient-to-b from-green-50 to-transparent dark:from-green-900/20 dark:to-transparent -z-10" />
         <div className="absolute top-20 right-0 w-96 h-96 bg-green-200/30 dark:bg-green-500/10 rounded-full blur-3xl -z-10 animate-pulse" />
         <div className="absolute top-40 left-10 w-72 h-72 bg-teal-200/30 dark:bg-teal-500/10 rounded-full blur-3xl -z-10" />
 
-        <div className="container mx-auto text-center max-w-4xl relative z-10">
+        <div className="container mx-auto text-center max-w-3xl relative z-10">
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -92,13 +92,13 @@ const RecycleAssessment = () => {
                 <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm text-sm font-semibold text-green-700 dark:text-green-400 mb-8">
                     ✨ AI-Powered Recycling Assistant
                 </span>
-                <h1 className="text-5xl md:text-7xl font-extrabold text-gray-900 dark:text-white mb-8 leading-[1.1]">
+                <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-6 leading-[1.1]">
                     Turn Waste into <br />
                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-600 via-emerald-500 to-teal-500 animate-gradient">
                         Sustainable Solutions
                     </span>
                 </h1>
-                <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-12 leading-relaxed">
+                <p className="text-base md:text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-8 leading-relaxed">
                     Upload a photo of your recyclables. Our AI instantly identifies materials and suggests creative DIY reuse projects.
                 </p>
             </motion.div>
@@ -113,7 +113,7 @@ const RecycleAssessment = () => {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.6 }}
-            className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/20 dark:border-gray-700 p-6 md:p-10 max-w-5xl mx-auto"
+            className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/20 dark:border-gray-700 p-6 md:p-8 max-w-4xl mx-auto"
         >
             <div className="max-w-3xl mx-auto">
                 <ImageUpload images={images} setImages={setImages} />
@@ -128,12 +128,12 @@ const RecycleAssessment = () => {
                     </motion.div>
                 )}
 
-                <div className="mt-8 flex justify-center">
+                <div className="mt-6 flex justify-center">
                     <button
                         onClick={handleAnalyze}
                         disabled={loading || images.length === 0}
                         className={`
-                            relative group flex items-center justify-center gap-3 px-12 py-4 rounded-full text-lg font-bold transition-all duration-300 overflow-hidden
+                            relative group flex items-center justify-center gap-3 px-8 py-3 rounded-full text-base font-bold transition-all duration-300 overflow-hidden
                             ${loading || images.length === 0 
                                 ? 'bg-gray-100 dark:bg-gray-700 text-gray-400 dark:text-gray-500 cursor-not-allowed' 
                                 : 'bg-green-600 text-white hover:scale-105 hover:shadow-xl hover:shadow-green-500/20 active:scale-95'}
