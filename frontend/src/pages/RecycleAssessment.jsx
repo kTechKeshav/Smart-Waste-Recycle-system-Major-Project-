@@ -1,10 +1,10 @@
+import React, { useState } from 'react';
+import axios from 'axios';
 import ImageUpload from '../components/ImageUpload';
 import ResultsGrid from '../components/ResultsGrid';
 import ThemeToggle from '../components/ThemeToggle';
-import { Loader2 } from 'lucide-react';
+import { Loader2, Leaf } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { useState } from 'react';
-import axios from 'axios';
 
 const RecycleAssessment = () => {
   const [images, setImages] = useState([]);
@@ -20,7 +20,13 @@ const RecycleAssessment = () => {
     
     setLoading(true);
     setError(null);
-    setResults(null);
+    setResults(null); // Clear previous results to show skeleton if desired, or keep them.
+    // Actually, distinct skeleton usage is better with "results=null" or a separate loading prop.
+    
+    // Scroll to results area immediately to show loading state
+    setTimeout(() => {
+        document.getElementById('results')?.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
 
     const formData = new FormData();
     images.forEach(image => {
@@ -29,7 +35,7 @@ const RecycleAssessment = () => {
 
     try {
       const port = 4000; 
-      const response = await axios.post(`http://localhost:${port}/api/recycle/analyze`, formData, {
+      const response = await axios.post('http://localhost:' + port + '/api/recycle/analyze', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
 
@@ -38,10 +44,6 @@ const RecycleAssessment = () => {
             recommendations: response.data.recommendations,
             wasteInfo: response.data.waste_info
         });
-        // Scroll to results
-        setTimeout(() => {
-            document.getElementById('results')?.scrollIntoView({ behavior: 'smooth' });
-        }, 100);
       } else {
           setError(response.data.message || "Failed to analyze images. Please try again.");
       }
@@ -59,90 +61,110 @@ const RecycleAssessment = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300 font-outfit">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300 font-sans selection:bg-green-100 selection:text-green-800">
       
-      {/* Navbar / Header */}
-      <nav className="absolute top-0 w-full p-4 flex justify-between items-center z-50">
-          <div className="font-bold text-xl text-white tracking-wider">ScrapSmart</div>
+      {/* Navbar */}
+      <nav className="fixed top-0 w-full p-4 md:p-6 flex justify-between items-center z-50 backdrop-blur-md bg-white/70 dark:bg-gray-900/70 border-b border-gray-200/50 dark:border-gray-800/50">
+          <div className="flex items-center gap-2">
+            <div className="bg-gradient-to-br from-green-400 to-emerald-600 p-2 rounded-xl shadow-lg shadow-green-200 dark:shadow-none">
+                <Leaf className="text-white" size={20} />
+            </div>
+            <span className="font-bold text-xl tracking-tight text-gray-800 dark:text-white">
+                Scrap<span className="text-green-600">Smart</span>
+            </span>
+          </div>
           <ThemeToggle />
       </nav>
 
       {/* Hero Section */}
-      {/* UI FIX: Added 'pb-32' to extend background, removed 'mb-8' */}
-      <div className="relative overflow-hidden bg-gradient-to-br from-green-600 to-green-800 text-white py-20 pb-32 px-4 rounded-b-[3rem] shadow-xl">
-        <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#ffffff33_1px,transparent_1px)] [background-size:16px_16px]"></div>
-        
-        <div className="container mx-auto relative z-10 text-center max-w-3xl">
-            <motion.h1 
-                initial={{ y: -30, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
+      <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 px-4 overflow-hidden">
+        {/* Background Elements */}
+        <div className="absolute top-0 inset-x-0 h-[500px] bg-gradient-to-b from-green-50 to-transparent dark:from-green-900/20 dark:to-transparent -z-10" />
+        <div className="absolute top-20 right-0 w-96 h-96 bg-green-200/30 dark:bg-green-500/10 rounded-full blur-3xl -z-10 animate-pulse" />
+        <div className="absolute top-40 left-10 w-72 h-72 bg-teal-200/30 dark:bg-teal-500/10 rounded-full blur-3xl -z-10" />
+
+        <div className="container mx-auto text-center max-w-4xl relative z-10">
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
-                className="text-5xl md:text-6xl font-extrabold mb-6 leading-tight"
             >
-                Give Waste a <span className="text-yellow-300 inline-block transform hover:scale-105 transition-transform">New Life</span>
-            </motion.h1>
-            <motion.p 
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="text-lg md:text-xl opacity-90 leading-relaxed"
-            >
-                Upload photos of your recyclables and get instant AI-powered DIY projects and reuse guides.
-            </motion.p>
+                <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm text-sm font-semibold text-green-700 dark:text-green-400 mb-8">
+                    ✨ AI-Powered Recycling Assistant
+                </span>
+                <h1 className="text-5xl md:text-7xl font-extrabold text-gray-900 dark:text-white mb-8 leading-[1.1]">
+                    Turn Waste into <br />
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-600 via-emerald-500 to-teal-500 animate-gradient">
+                        Sustainable Solutions
+                    </span>
+                </h1>
+                <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-12 leading-relaxed">
+                    Upload a photo of your recyclables. Our AI instantly identifies materials and suggests creative DIY reuse projects.
+                </p>
+            </motion.div>
         </div>
-      </div>
+      </section>
 
-      {/* UI FIX: Added '-mt-24' and 'relative z-10' to pull card up over the green background */}
-      <div className="container mx-auto px-4 -mt-24 relative z-10 pb-20 space-y-12">
+      {/* Main Content */}
+      <main className="container mx-auto px-4 pb-24 -mt-10 relative z-20">
         
-        {/* Upload Section */}
+        {/* Upload Container */}
         <motion.div 
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 max-w-4xl mx-auto border border-gray-100 dark:border-gray-700"
+            transition={{ delay: 0.2, duration: 0.6 }}
+            className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/20 dark:border-gray-700 p-6 md:p-10 max-w-5xl mx-auto"
         >
-            <h2 className="text-2xl font-bold mb-6 text-center text-gray-700 dark:text-gray-200">Start Assessment</h2>
-            <ImageUpload images={images} setImages={setImages} />
-            
-            {error && (
-                <motion.div 
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: 'auto' }}
-                    className="mt-4 p-4 bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-300 text-center rounded-lg border border-red-100 dark:border-red-800 text-sm font-medium"
-                >
-                    {error}
-                </motion.div>
-            )}
+            <div className="max-w-3xl mx-auto">
+                <ImageUpload images={images} setImages={setImages} />
+                
+                {error && (
+                    <motion.div 
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        className="mt-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-100 dark:border-red-800 text-red-600 dark:text-red-300 rounded-xl text-center text-sm font-medium"
+                    >
+                        {error}
+                    </motion.div>
+                )}
 
-            <div className="mt-8 flex justify-center">
-                <button
-                    onClick={handleAnalyze}
-                    disabled={loading || images.length === 0}
-                    className={`
-                        group flex items-center gap-3 px-10 py-4 rounded-full text-lg font-bold shadow-lg transform transition-all
-                        ${loading || images.length === 0 
-                            ? 'bg-gray-300 dark:bg-gray-700 text-gray-500 dark:text-gray-400 cursor-not-allowed' 
-                            : 'bg-green-600 hover:bg-green-500 text-white hover:scale-105 active:scale-95 hover:shadow-green-500/30'}
-                    `}
-                >
-                    {loading ? (
-                          <>
-                             <Loader2 className="animate-spin" /> Analyzing...
-                          </>
-                    ) : (
-                          "Analyze Waste"
-                    )}
-                </button>
+                <div className="mt-8 flex justify-center">
+                    <button
+                        onClick={handleAnalyze}
+                        disabled={loading || images.length === 0}
+                        className={`
+                            relative group flex items-center justify-center gap-3 px-12 py-4 rounded-full text-lg font-bold transition-all duration-300 overflow-hidden
+                            ${loading || images.length === 0 
+                                ? 'bg-gray-100 dark:bg-gray-700 text-gray-400 dark:text-gray-500 cursor-not-allowed' 
+                                : 'bg-green-600 text-white hover:scale-105 hover:shadow-xl hover:shadow-green-500/20 active:scale-95'}
+                        `}
+                    >
+                        {loading ? (
+                            <>
+                                <Loader2 className="animate-spin" /> 
+                                <span>Analyzing...</span>
+                            </>
+                        ) : (
+                            <>
+                                <span>Analyze Waste</span>
+                                <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+                            </>
+                        )}
+                    </button>
+                </div>
             </div>
         </motion.div>
 
         {/* Results Section */}
-        <div id="results">
-            {results && <ResultsGrid recommendations={results.recommendations} wasteInfo={results.wasteInfo} />}
+        <div id="results" className="scroll-mt-32">
+            <ResultsGrid 
+                recommendations={results ? results.recommendations : null} 
+                wasteInfo={results ? results.wasteInfo : null}
+                loading={loading}
+            />
         </div>
 
-      </div>
+      </main>
     </div>
   );
 };
