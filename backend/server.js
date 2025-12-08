@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors"
 import 'dotenv/config';
 import connectDB from "./config/mongodb.js";
+import recycleRouter from "./routes/recycleRoute.js";
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -11,6 +12,8 @@ const PORT = process.env.PORT || 4000;
 
 app.use(express.json());
 app.use(cors())
+
+app.use('/api/recycle', recycleRouter);
 
 app.get('/', (req, res)=>{
       res.send("API Working");
