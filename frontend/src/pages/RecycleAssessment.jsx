@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
-import axios from 'axios';
 import ImageUpload from '../components/ImageUpload';
 import ResultsGrid from '../components/ResultsGrid';
+import ThemeToggle from '../components/ThemeToggle';
 import { Loader2 } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useState } from 'react';
+import axios from 'axios';
 
 const RecycleAssessment = () => {
   const [images, setImages] = useState([]);
@@ -63,6 +64,7 @@ const RecycleAssessment = () => {
       {/* Navbar / Header */}
       <nav className="absolute top-0 w-full p-4 flex justify-between items-center z-50">
           <div className="font-bold text-xl text-white tracking-wider">ScrapSmart</div>
+          <ThemeToggle />
       </nav>
 
       {/* Hero Section */}
