@@ -1,3 +1,4 @@
+
 # Smart Recycle System — Major Project
 
 A compact computer-vision powered web app for sorting recyclable materials (plastic, paper, glass, metal, cardboard, trash). This repository contains the training code, dataset layout, a Keras model, and a lightweight Flask backend that serves predictions for a static frontend.
@@ -140,3 +141,5 @@ Maintainer: Keshav (repository owner `kTechKeshav`). For questions or help, open
 ---
 
 Thank you for exploring the Smart Recycle System project — happy recycling!
+=======
+This is README.md of Smart waste System.
