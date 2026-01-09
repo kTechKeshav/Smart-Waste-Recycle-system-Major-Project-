@@ -4,6 +4,14 @@
 
 The Smart Recycle System is an AI-powered platform that helps users identify recyclable materials and provides creative DIY reuse ideas. It uses a microservices architecture to process images and generate intelligent recommendations.
 
+## 📸 Screenshots
+
+![Dark Mode](screenshots/Img%201%20dark.png)
+![Light Mode](screenshots/Img%202%20white.png)
+![App Interface](screenshots/Img%203.png)
+![Scanning Feature](screenshots/Img%204.png)
+![Creative Ideas](screenshots/Img%205.png)
+
 ## 🏗️ System Architecture
 
 The project consists of three main components:
