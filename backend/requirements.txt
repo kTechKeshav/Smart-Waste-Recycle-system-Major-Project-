@@ -1,7 +1,0 @@
-numpy 
-pandas
-ipykernel
-tensorflow
-fastapi
-uvicorn
-python-multipart
