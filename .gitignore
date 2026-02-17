@@ -20,7 +20,7 @@ env/
 # ----------------------------
 # TF model temporary files
 *.h5
-*.keras
+# *.keras
 *.pb
 *.tflite
 *.onnx
@@ -29,7 +29,7 @@ env/
 **/variables/
 
 # Skip huge trained models (optional)
-backend/models/*.keras
+# backend/models/*.keras
 backend/models/*.h5
 
 # ----------------------------
