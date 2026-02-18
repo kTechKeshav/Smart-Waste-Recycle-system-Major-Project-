@@ -18,7 +18,8 @@ const processRecycleItems = async (req, res) => {
             formData.append('file', file.buffer, { filename: file.originalname });
 
             try {
-                const response = await axios.post('http://127.0.0.1:8000/predict', formData, {
+                const classificationUrl = process.env.CLASSIFICATION_SERVICE_URL || 'http://127.0.0.1:8000';
+                const response = await axios.post(`${classificationUrl}/predict`, formData, {
                     headers: { ...formData.getHeaders() },
                 });
 
@@ -52,7 +53,8 @@ const processRecycleItems = async (req, res) => {
         // 2. Get Recommendations from Service 2
         let recommendations = null;
         try {
-            const recResponse = await axios.post('http://127.0.0.1:5000/api/reuse-guides', {
+            const recommendationUrl = process.env.RECOMMENDATION_SERVICE_URL || 'http://127.0.0.1:5000';
+            const recResponse = await axios.post(`${recommendationUrl}/api/reuse-guides`, {
                 waste_items: uniqueLabels
             });
             recommendations = recResponse.data;
@@ -70,7 +72,8 @@ const processRecycleItems = async (req, res) => {
         const wasteInfoResults = {};
         for (const label of uniqueLabels) {
             try {
-                const infoResponse = await axios.post('http://127.0.0.1:5000/api/waste-info', {
+                const recommendationUrl = process.env.RECOMMENDATION_SERVICE_URL || 'http://127.0.0.1:5000';
+                const infoResponse = await axios.post(`${recommendationUrl}/api/waste-info`, {
                     material: label
                 });
                 wasteInfoResults[label] = infoResponse.data;

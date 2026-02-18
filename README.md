@@ -26,10 +26,10 @@ The project consists of three main components:
     - Handles file uploads and orchestrates calls to AI services.
     - Runs on Port `4000` by default.
 
-3.  **AI Services** (External Dependencies):
-    - **Classification Service** (Port `8000`): Identifies waste type from images.
-    - **Recommendation Service** (Port `5000`): Generates reuse guides.
-    - *Note: These services must be running locally for the full analysis flow to work.*
+3.  **AI Services** (Deployed on Render):
+    - **Classification Service**: [Live URL](https://smart-waste-recycle-system-major-project-8nix.onrender.com/) - Identifies waste type from images.
+    - **Recommendation Service**: [Live URL](https://smart-waste-recycle-system-major-project-1rlk.onrender.com/) - Generates reuse guides.
+    - *Note: These services are now integrated via environment variables.*
 
 ## 🚀 Getting Started
 

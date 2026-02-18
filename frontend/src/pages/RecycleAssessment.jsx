@@ -34,8 +34,8 @@ const RecycleAssessment = () => {
     });
 
     try {
-      const port = 4000; 
-      const response = await axios.post('http://localhost:' + port + '/api/recycle/analyze', formData, {
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:4000';
+      const response = await axios.post(`${apiUrl}/api/recycle/analyze`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
 

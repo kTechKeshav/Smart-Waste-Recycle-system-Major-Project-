@@ -1,0 +1,32 @@
+services:
+  # Backend service
+  - type: web
+    name: smart-recycle-backend
+    env: node
+    plan: free
+    region: singapore
+    buildCommand: npm install
+    startCommand: npm start
+    rootDir: backend
+    envVars:
+      - key: PORT
+        value: 4000
+      - key: MONGODB_URI
+        sync: false
+      - key: CLASSIFICATION_SERVICE_URL
+        value: https://smart-waste-recycle-system-major-project-8nix.onrender.com
+      - key: RECOMMENDATION_SERVICE_URL
+        value: https://smart-waste-recycle-system-major-project-1rlk.onrender.com
+
+  # Frontend service
+  - type: web
+    name: smart-recycle-frontend
+    env: static
+    plan: free
+    region: singapore
+    buildCommand: npm install && npm run build
+    publishPath: frontend/dist
+    rootDir: frontend
+    envVars:
+      - key: VITE_API_URL
+        sync: false # User will need to provide the backend URL here after first deployment
