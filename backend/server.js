@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 4000;
 // connectDB();
 
 app.use(express.json());
-app.use(cors())
+app.use(cors()); // In production, you might want to restrict this to your frontend URL
 
 app.use('/api/recycle', recycleRouter);
 
