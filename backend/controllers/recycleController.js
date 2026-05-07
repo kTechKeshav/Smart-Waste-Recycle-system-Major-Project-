@@ -72,7 +72,7 @@ const processRecycleItems = async (req, res) => {
         const wasteInfoResults = {};
         for (const label of uniqueLabels) {
             try {
-                const recommendationUrl = process.env.RECOMMENDATION_SERVICE_URL || 'http://127.0.0.1:5000';
+                const recommendationUrl = process.env.RECOMMENDATION_SERVICE_URL || 'https://smart-waste-recycle-system-major-project-1rlk.onrender.com';
                 const infoResponse = await axios.post(`${recommendationUrl}/api/waste-info`, {
                     material: label
                 });
