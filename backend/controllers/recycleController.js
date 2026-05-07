@@ -53,7 +53,7 @@ const processRecycleItems = async (req, res) => {
         // 2. Get Recommendations from Service 2
         let recommendations = null;
         try {
-            const recommendationUrl = process.env.RECOMMENDATION_SERVICE_URL || 'http://127.0.0.1:5000';
+            const recommendationUrl = process.env.RECOMMENDATION_SERVICE_URL || 'https://smart-waste-recycle-system-major-project-1rlk.onrender.com';
             const recResponse = await axios.post(`${recommendationUrl}/api/reuse-guides`, {
                 waste_items: uniqueLabels
             });

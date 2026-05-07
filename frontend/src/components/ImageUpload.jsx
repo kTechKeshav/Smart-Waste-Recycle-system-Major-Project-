@@ -71,7 +71,7 @@ const ImageUpload = ({ images, setImages }) => {
                 key={`${file.name}-${index}`}
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.5, opacity: 0 }}
+                exit={{ opacity: 0, scale: 0.5 }}
                 layout
                 className="relative group aspect-square rounded-2xl overflow-hidden shadow-md border border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-800"
                 >
